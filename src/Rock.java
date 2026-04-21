@@ -33,9 +33,11 @@ public class Rock {
 
     // Rock count
     private static int rockCount = 0;
+    String[][] world;
+    Point position;
 
     // Increment rock count
-    public Rock(Point position, World){
+    public Rock(Point position, String[][] world){
         this.position = position;
         this.world = world;
         rockCount++;
