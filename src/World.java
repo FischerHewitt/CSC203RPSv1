@@ -1,7 +1,7 @@
 import static java.lang.Math.random;
 
 /*
-    Developers: Fischer Hewitt
+    Developers: Fischer Hewitt, ___
     Date: 04/20/2026
     Project 2: RPSv1
     Description: Build a rock paper scissors game that has a world full of rock, paper, and scissors, then they move
@@ -29,13 +29,11 @@ class World{
     and our y will be in the vertical direction(also known as the height) starting at 0.
     {{(0,0), (0,1), (0,2)}, {(1,0), (1,1), (2,1)}}
      */
-    World(int width, int height, int numOfObjects){//width is the size of the outer list, height is the size of the inner list
+    World(int width, int height){//width is the size of the outer list, height is the size of the inner list
 
         this.width = width;
         this.height = height;
         this.world = new String[width][height];
-
-        initializeObjects(numOfObjects);
 
     }
 
@@ -46,46 +44,82 @@ class World{
      */
     public void initializeObjects(int numOfObjects){
         for (int idx = 0; idx < numOfObjects; idx++) {
-            initializeRock();
-            initializePaper();
-            initializeScissors();
+            addEntity();
 
         }
     }
+    /*
+    adds an entity (rock, paper, and scissors) in the world.
+    Input:null
+    output:null
+    */
+    public void addEntity(){
+        addRock();// adds a rock to the world
+        addPaper();// adds a paper to the world
+        addScissors();// adds scissors to the world
+    }
 
-    public void initializeRock(){
-        int xRock = getRandomWidth(); //gives you a random int between 0 and width
-        int yRock = getRandomHeight(); //gives you a random int between 0 and height
-        Point rockPoint = findEmpty(xRock, yRock);
+    /*
+    this initializes a Rock Object and add it to our world array.
+    Input: null
+    output: null
+    Result: After finding an empty spot using the findEmpty,
+    it creates a new rock object with the coordinates it is at in the list
+     */
+    public void addRock(){
+        int xRock = getRandomWidth(); //gets the x coordinate of the rock by generating a random int between 0 and width
+        int yRock = getRandomHeight(); //gets the y coordinate of the rock by generating a random int between 0 and height
+        Point rockPoint = findEmpty(xRock, yRock);  //finds an empty coordinate in the world array
 
         world[xRock][yRock] = "R";
         new Rock(rockPoint, this.world);
     }
 
-    public void initializePaper(){
-        int xPaper = getRandomWidth(); //gives you a random int between 0 and width
-        int yPaper = getRandomHeight(); //gives you a random int between 0 and height
-        Point paperPoint = findEmpty(xPaper, yPaper);
+    /*
+    this initializes a Paper Object and add it to our world array.
+    Input: null
+    output: null
+    Result: After finding an empty spot using the findEmpty,
+    it creates a new paper object with the coordinates it is at in the list
+     */
 
-        world[paperPoint.getX][paperPoint.getY] = "P";
-        new Paper(paperPoint, this.world);
+    public void addPaper(){
+        int xPaper = getRandomWidth(); //gets the x coordinate of the paper by generating a random int between 0 and width
+        int yPaper = getRandomHeight(); //gets the y coordinate of the paper by generating a random int between 0 and height
+        Point paperPoint = findEmpty(xPaper, yPaper);  //finds an empty coordinate in the world array
+
+        //world[paperPoint.getX][paperPoint.getY] = "P";
+        //new Paper(paperPoint, this.world);
     }
 
-    public void initializeScissors(){
-        int xScissors = getRandomWidth(); //gives you a random int between 0 and width
-        int yScissors = getRandomHeight(); //gives you a random int between 0 and height
-        Point scissorsPoint = findEmpty(xScissors, yScissors);
+    /*
+    this initializes a Scissors Object and add it to our world array.
+    Input: null
+    output: null
+    Result: After finding an empty spot using the findEmpty,
+    it creates a new scissors object with the coordinates it is at in the list
+     */
+    public void addScissors(){
+        int xScissors = getRandomWidth(); //gets the x coordinate of the scissors by generating a random int between 0 and width
+        int yScissors = getRandomHeight(); //gets the y coordinate of the scissors by generating a random int between 0 and height
+        Point scissorsPoint = findEmpty(xScissors, yScissors); //finds an empty coordinate in the world array
 
-        world[scissorsPoint.getX][scissorsPoint.getY] = "S";
-        new Scissors(scissorsPoint, this.world);
+        //world[scissorsPoint.getX][scissorsPoint.getY] = "S";
+        //new Scissors(scissorsPoint, this.world);
     }
 
+    /*
+    finds an empty spot in the array initializing all the objects to make sure they have a place
+    (we check to make sure all objects will fit in dimensions in gameplay)
+    input: int x, int y
+    result: Point(x,y). Returns a point that is a valid empty spot.
+     */
     public Point findEmpty(int x, int y){
-        while (world[x][y] != null){
+        while (world[x][y] != null){ //if the current spot is not empty go check all the x's for each height.
             int counter = 0;
             while (world[x][y] != null && counter < this.width){
-                x = (x + 1) % this.width;
-                counter++;
+                x = (x + 1) % this.width; // makes sure it stays within the boundaries
+                counter++; // lets us check the height and not iterate for infinity
             }
             y = (y + 1) % this.height;
         }
@@ -93,17 +127,22 @@ class World{
         return new Point(x, y);
     }
 
+    /*
+    gets a random value between 0 and the width
+    input: null
+    output: int of a random value
+     */
     public int getRandomWidth(){
         return (int)(random() * this.width);
     }
 
+    /*
+    gets a random value between 0 and the height
+    input: null
+    output: int of a random value
+     */
     public int getRandomHeight(){
         return (int)(random() * this.height);
-    }
-
-
-    addEntity(){
-
     }
 
 }
