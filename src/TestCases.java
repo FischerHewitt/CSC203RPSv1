@@ -1,4 +1,4 @@
-/*
+
 /*
     Developers: Fischer Hewitt, Sameeka Molugu, Mason Brown
     Date: 04/20/2026
@@ -34,7 +34,7 @@ public class TestCases {
         System.out.println("Expected output: w=2, h=3");
         System.out.print("Actual output:");
         World world1 = new World(2, 3);
-        System.out.printf("w=%d, h=%d", world1.world.length, world1.world[1].length);
+        System.out.printf("w=%d, h=%d", world1.world.length, world1.world[0].length);
 
 
     }
