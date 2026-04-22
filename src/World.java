@@ -148,10 +148,5 @@ class World{
         return (int)(random() * this.height);
     }
 
-    public void removeEntity(Point point){
-        world[point.getX()][point.getY()] = null;
-    }
-
-
 
 }

@@ -85,8 +85,8 @@ public class Rock {
         // Check all positions around the rock
         for(int x = -1; x <= 1; x++){
             for(int y = -1; y <= 1; y++){
-                int newX = position.getX() + x;
-                int newY = position.getY() + y;
+                int newX = position.getPointX() + x;
+                int newY = position.getPointY() + y;
 
                 // Add to list if within bounds
                 if((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)){
@@ -105,7 +105,6 @@ public class Rock {
         // Pick a random position from the list,
         Random rand = new Random();
         Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
-
         setEntityPosition(newPosition);
     }
 
@@ -114,8 +113,8 @@ public class Rock {
     public void rockAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
-            if(world[p.getX()][p.getY()] instanceof Scissors){
-                world[p.getX()][p.getY()] = null;
+            if(world[p.getPointX()][p.getPointY()] instanceof Scissors){
+                world[p.getPointX()][p.getPointY()] = null;
             }
         }
     }
