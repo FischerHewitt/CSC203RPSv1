@@ -18,6 +18,10 @@
 //Purpose: this function calculates the total number of rocks
 //Examples: totalRock() -> 5
 
+// checkNeighbors() -> ArrayList
+// Purpose: this function checks all neighboring cells around the rock and returns a list of valid positions
+// Examples: checkNeighbors() -> [(2,2), (2,3), (3,2)]
+
 //moveRock() -> void
 //Purpose: this function moves the rock in a direction (N, E, S, W)
 //Examples: moveRock() -> rock moves from Point(1, 1) to Point(2, 2)
@@ -41,26 +45,55 @@ public class Rock {
         rockCount++;
     }
 
-    // Get
+    // Get current position
     public Point getEntityPosition() {
         return position;
     }
 
-    // Set
+    // Set current position
     public void setEntityPosition(Point position) {
         this.position = position;
     }
 
-    // Move rock
-    public void moveRock(World myWorld){
-        // Move position
-        myRock.position.getX = 1;
-        myRock.position.getY = 1;
+
+    public ArrayList<Point> checkNeighbors(){
+        ArrayList<Point> neighbors = new ArrayList<>();
+
+        // Check all positions around the rock
+        for(int x = -1; x <= 1; x++){
+            for(int y = -1; y <= 1; y++){
+                int newX = position.x + x;
+                int newY = position.y + y;
+
+                // Add to list if within bounds
+                if(world.isInBounds(newX, newY)){
+                    neighbors.add(new Point(newX, newY));
+                }
+            }
+        }
+        return neighbors;
     }
+
+
+    // Move rock
+    public void moveRock(){
+        ArrayList<Point> neighbors = checkNeighbors();
+
+        // Pick a random position from the list
+        Random rand = new Random();
+        Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
+
+        setEntityPosition(newPosition);
+    }
+
 
     // Rock attack
-    public void rockAttack(){
-
+    public void rockAttack() {
+        ArrayList<Point> neighbors = checkNeighbors();
+        for (Point p : neighbors) {
+            if(world.getEntity(p.intx, p.y).toString().equals("S")){
+                world.removeEntity(p.x, p.y);
+            }
+        }
     }
-
 }
