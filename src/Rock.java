@@ -39,7 +39,7 @@ public class Rock {
     private static int rockCount = 0;
 
     // Increment rock count
-    public Rock(Point position, World){
+    public Rock(Point position, object[][]){
         this.position = position;
         this.world = world;
         rockCount++;
@@ -55,7 +55,7 @@ public class Rock {
         this.position = position;
     }
 
-
+    // Check neighbors
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class Rock {
     public void moveRock(){
         ArrayList<Point> neighbors = checkNeighbors();
 
-        // Pick a random position from the list
+        // Pick a random position from the list,
         Random rand = new Random();
         Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
 
@@ -91,7 +91,7 @@ public class Rock {
     public void rockAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
-            if(world.getEntity(p.intx, p.y).toString().equals("S")){
+            if(world.getEntity(p.x, p.y).toString().equals("S")){
                 world.removeEntity(p.x, p.y);
             }
         }
