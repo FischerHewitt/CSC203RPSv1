@@ -20,10 +20,10 @@ import java.util.Arrays;
 public class TestCases {
     public static void main(String[] args){
         System.out.println("Test 01:\nTesting  World(int width=2, int height=3) method.");
-        System.out.println("Expected output:");
-        System.out.println("Actual output:");
+        System.out.println("Expected output: w=2, h=3");
+        System.out.print("Actual output:");
         World world1 = new World(2, 3);
-        System.out.println(Arrays.toString(world1.world));
+        System.out.printf("w=%d, h=%d", world1.world.length, world1.world[1].length);
 
 
     }

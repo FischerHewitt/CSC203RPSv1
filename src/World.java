@@ -20,7 +20,7 @@ import static java.lang.Math.random;
 class World{
     public int width;
     public int height;
-    String[][] world;
+    Object[][] world;
 
     /*
     Creates the world as an Array<Array<String>> where its an Array[width[height]].
@@ -33,8 +33,14 @@ class World{
 
         this.width = width;
         this.height = height;
-        this.world = new String[width][height];
+        this.world = new Object[width][height];
 
+        // sets the list = to null
+        for (int idxW = 0; idxW < this.width; idxW++){
+            for (int idxH = 0; idxH < this.height; idxH++){
+                this.world[idxW][idxH] = null;
+            }
+        }
     }
 
     /*
@@ -71,7 +77,6 @@ class World{
         int yRock = getRandomHeight(); //gets the y coordinate of the rock by generating a random int between 0 and height
         Point rockPoint = findEmpty(xRock, yRock);  //finds an empty coordinate in the world array
 
-        world[xRock][yRock] = "R";
         new Rock(rockPoint, this.world);
     }
 
@@ -88,7 +93,6 @@ class World{
         int yPaper = getRandomHeight(); //gets the y coordinate of the paper by generating a random int between 0 and height
         Point paperPoint = findEmpty(xPaper, yPaper);  //finds an empty coordinate in the world array
 
-        //world[paperPoint.getX][paperPoint.getY] = "P";
         //new Paper(paperPoint, this.world);
     }
 
@@ -104,7 +108,6 @@ class World{
         int yScissors = getRandomHeight(); //gets the y coordinate of the scissors by generating a random int between 0 and height
         Point scissorsPoint = findEmpty(xScissors, yScissors); //finds an empty coordinate in the world array
 
-        //world[scissorsPoint.getX][scissorsPoint.getY] = "S";
         //new Scissors(scissorsPoint, this.world);
     }
 
@@ -143,6 +146,10 @@ class World{
      */
     public int getRandomHeight(){
         return (int)(random() * this.height);
+    }
+
+    public void removeEntity(Point point){
+        world[point.getX()][point.getY()] = null;
     }
 
 }

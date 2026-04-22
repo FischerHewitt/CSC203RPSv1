@@ -32,12 +32,12 @@ public class Rock {
     // Random number generator
 
     // Rock count
-    private static int rockCount = 0;
-    String[][] world;
-    Point position;
+    static int rockCount = 0;
+    private Object[][] world;
+    private Point position;
 
     // Increment rock count
-    public Rock(Point position, String[][] world){
+    public Rock(Point position, Object[][] world){
         this.position = position;
         this.world = world;
         rockCount++;
