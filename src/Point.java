@@ -25,6 +25,16 @@ public class Point {
         this.y = y;
     }
 
-    //get functions????
+    public int getPointX(){
+        return this.x;
+    }
+
+    public int getPointY(){
+        return this.y;
+    }
+
+    public Point getPoint(){
+        return this;
+    }
 
 }
