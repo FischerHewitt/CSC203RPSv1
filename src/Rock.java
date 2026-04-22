@@ -31,6 +31,9 @@
 //Examples: rockAttack() -> removes adjacent paper if it is next to rock
 
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Rock {
     // Current rock position
     // Random number generator
@@ -64,11 +67,11 @@ public class Rock {
         // Check all positions around the rock
         for(int x = -1; x <= 1; x++){
             for(int y = -1; y <= 1; y++){
-                int newX = position.x + x;
-                int newY = position.y + y;
+                int newX = position.getX() + x;
+                int newY = position.getY() + y;
 
                 // Add to list if within bounds
-                if(world.isInBounds(newX, newY)){
+                if((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)){
                     neighbors.add(new Point(newX, newY));
                 }
             }
@@ -94,7 +97,7 @@ public class Rock {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
             if(world.getEntity(p.intx, p.y).toString().equals("S")){
-                world.removeEntity(p.x, p.y);
+                world.removeEntity(Point(p.x, p.y);
             }
         }
     }
