@@ -1,3 +1,21 @@
+/*
+    Developers: Fischer Hewitt, Sameeka Molugu, Mason Brown
+    Date: 04/20/2026
+    Project 2: RPSv1
+    Description: Build a rock paper scissors game that has a world full of rock, paper, and scissors, then they move
+    around randomly and the last object standing is the winner.
+    world view print view with coordinate labels
+   0 1 2 3 (x)      ^ 0 1 2
+  +-+-+-+-+           ^ ^ ^
+0 | | | | |        0
+  +-+-+-+-+           - - -
+1 | | | | |        1
+  +-+-+-+-+           - - -
+2 | | | | |        2
+  +-+-+-+-+           v v v
+(y)                          v
+ */
+
 // Documentation
 // Rock.java
 // Purpose: this class represents a rock entity that moves around the world
@@ -60,7 +78,7 @@ public class Rock {
         this.position = position;
     }
 
-
+    // Check neighbors
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
 
@@ -84,7 +102,7 @@ public class Rock {
     public void moveRock(){
         ArrayList<Point> neighbors = checkNeighbors();
 
-        // Pick a random position from the list
+        // Pick a random position from the list,
         Random rand = new Random();
         Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
 
@@ -96,8 +114,8 @@ public class Rock {
     public void rockAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
-            if(world.getEntity(p.intx, p.y).toString().equals("S")){
-                world.removeEntity(Point(p.x, p.y);
+            if(world[p.getX()][p.getY()] instanceof Scissors){
+                world[p.getX()][p.getY()] = null;
             }
         }
     }
