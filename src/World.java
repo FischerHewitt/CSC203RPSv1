@@ -78,6 +78,7 @@ class World{
         Point rockPoint = findEmpty(xRock, yRock);  //finds an empty coordinate in the world array
 
         this.world[rockPoint.getPointX()][rockPoint.getPointY()] = new Rock(rockPoint, this.world);
+        //this is a comment
     }
 
     /*
@@ -120,9 +121,12 @@ class World{
     public Point findEmpty(int x, int y){
         while (world[x][y] != null){ //if the current spot is not empty go check all the x's for each height.
             int counter = 0;
-            while (world[x][y] != null && counter < this.width){
+            while ((world[x][y] != null) && (counter < this.width)){
                 x = (x + 1) % this.width; // makes sure it stays within the boundaries
                 counter++; // lets us check the height and not iterate for infinity
+            }
+            if (world[x][y] == null){ // check to see if it is null space or if we need to increase the height by 1
+                break;
             }
             y = (y + 1) % this.height;
         }
@@ -148,27 +152,39 @@ class World{
         return (int)(random() * this.height);
     }
 
+    //Random
+
+    /*
+    Purpose: prints the world with the Rock, Paper, and Scissors objects in it
+    input: null
+    output: null
+     */
     public void printWorld(){
+        System.out.println("World:");
+        // prints the top +-+-+-+
         for (int idxLine = 0; idxLine < this.width; idxLine++){
            System.out.print("+-") ; //prints the top +-+-+-
         }
         System.out.print("+\n"); // adds the last + to the top line
 
+
+        // prints the rest of the world
         for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
-            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) {
-                if (world[idxWidth][idxHeight] instanceof Rock) {
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to print at each width first before the height
+                if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
                     System.out.print("|R");
-                } else if (world[idxWidth][idxHeight] instanceof Paper) {
+                } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
                     System.out.print("|P");
-                } else if (world[idxWidth][idxHeight] instanceof Scissors) {
+                } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
                     System.out.print("|S");
                 } else {
                     System.out.print("| ");
                 }
             }
 
-            System.out.print("|\n");
+            System.out.print("|\n"); // prints the last | on the line
 
+            // prints the bottom line
             for (int idxLine = 0; idxLine < this.width; idxLine++){
                 System.out.print("+-") ; //prints the top +-+-+-
             }

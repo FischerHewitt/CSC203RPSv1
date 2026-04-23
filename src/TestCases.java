@@ -44,6 +44,7 @@ public class TestCases {
         System.out.println(
                         """
                 Expected output:
+                World:
                 +-+-+
                 | | |
                 +-+-+
@@ -61,6 +62,7 @@ public class TestCases {
         System.out.println(
                 """
         Expected output:
+        World:
         +-+-+-+
         |R| | |
         +-+-+-+
@@ -84,6 +86,7 @@ public class TestCases {
         System.out.println(
                 """
         Expected output:
+        World:
         +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
         |R| |  | |R|  | | |  | | |  | | |  | | |
         +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
@@ -102,6 +105,7 @@ public class TestCases {
         System.out.println(
                 """
         Expected output:
+        World:
         +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
         |P| |  | |P|  | | |  | | |  | | |  | | |
         +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
@@ -117,10 +121,11 @@ public class TestCases {
 
         // Test 06
         // Test addScissors() method. w=2, h=3, Rocks=1
-        System.out.println("Test 04:\nTesting addScissors() method. w=2, h=3, Scissors=1");
+        System.out.println("Test 06:\nTesting addScissors() method. w=2, h=3, Scissors=1");
         System.out.println(
                 """
         Expected output:
+        World:
         +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
         |S| |  | |S|  | | |  | | |  | | |  | | |
         +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
@@ -133,5 +138,55 @@ public class TestCases {
         world4.addScissors();
         System.out.println("Actual output:");
         world4.printWorld();
+
+        // Test 07
+        // Test findEmpty() method indirectly using world1. w=2, h=3, Rocks=5
+        System.out.println("Test 07:\nTesting findEmpty() method. w=2, h=3, Rocks=1");
+        System.out.println(
+                """
+        Expected output:
+        World:
+        +-+-+-+-+
+        |R|R|R|R|
+        +-+-+-+-+
+        |R|R|R|R|
+        +-+-+-+-+
+        |R|R|R|R|
+        +-+-+-+-+
+        """);
+        World world5 = new World(4, 3); // new world width=3 height=4
+        for (int xWorld5 = 0; xWorld5 < world5.width - 1; xWorld5++){
+            for (int yWorld5 = 0; yWorld5 < world5.height; yWorld5++){
+                world5.world[xWorld5][yWorld5] = new Rock(new Point(xWorld5,yWorld5), world2.world);
+            }
+        }
+        world5.world[3][0] = new Rock(new Point(3,0), world2.world); // new rock at Point(3,0)
+        world5.world[3][1] = new Rock(new Point(3,1), world2.world); // new rock at Point(3,1)
+         world5.addRock();
+        System.out.println("Actual output:");
+        world5.printWorld();
+
+
+        // Test 08
+        // Test findEmpty() method indirectly using world1. w=2, h=3, Rocks=5
+        System.out.println("Test 08:\nTesting findEmpty() method. w=2, h=3, Rocks=5");
+        System.out.println(
+                """
+        Expected output:
+        World:
+        +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
+        |R|R|  |R|R|  |R|R|  |R|R|  |R| |  | |R|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        |R|R|  |R|R|  |R| |  | |R|  |R|R|  |R|R|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        |R| |  | |R|  |R|R|  |R|R|  |R|R|  |R|R|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        """);
+        world1.addRock();
+        world1.addRock();
+        world1.addRock();
+        world1.addRock();
+        System.out.println("Actual output:");
+        world1.printWorld();
     }
 }
