@@ -30,12 +30,108 @@ import java.util.Arrays;
 
 public class TestCases {
     public static void main(String[] args){
-        System.out.println("Test 01:\nTesting  World(int width=2, int height=3) method.");
+        // Test 01
+        // Testing World(int width=2, int height=3)
+        System.out.println("Test 01:\nTesting World(int width=2, int height=3) method.");
         System.out.println("Expected output: w=2, h=3");
         System.out.print("Actual output:");
-        World world1 = new World(2, 3);
-        System.out.printf("w=%d, h=%d", world1.world.length, world1.world[0].length);
+        World world1 = new World(2, 3); // creates a new world with width=2 height=3
+        System.out.printf("w=%d, h=%d %n%n", world1.world.length, world1.world[0].length); //formats with width and height
 
+        // Test 02
+        // Testing printWorld() with width=2, height=3, world is empty
+        System.out.println("Test 02:\nTesting printWorld() method. w=2, h=3, world is empty.");
+        System.out.println(
+                        """
+                Expected output:
+                +-+-+
+                | | |
+                +-+-+
+                | | |
+                +-+-+
+                | | |
+                +-+-+
+                """);
+        System.out.println("Actual output:");
+        world1.printWorld(); //prints the world
 
+        // Test 03
+        // Testing Print world with objects in the world.
+        System.out.println("Test 03:\nTesting printWorld() method. w=3, h=4, Rocks=3");
+        System.out.println(
+                """
+        Expected output:
+        +-+-+-+
+        |R| | |
+        +-+-+-+
+        | |R| |
+        +-+-+-+
+        | | |R|
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        """);
+        World world2 = new World(3, 4); // new world width=3 height=4
+        world2.world[0][0] = new Rock(new Point(0,0), world2.world); // new rock at Point(0,0)
+        world2.world[1][1] = new Rock(new Point(1,1), world2.world); // new rock at Point(1,1)
+        world2.world[2][2] = new Rock(new Point(2,2), world2.world); // new rock at Point(2,2)
+        System.out.println("Actual output:");
+        world2.printWorld();
+
+        // Test 04
+        // Test addRock() method. w=2, h=3, Rocks=1
+        System.out.println("Test 04:\nTesting addRock() method. w=2, h=3, Rocks=1");
+        System.out.println(
+                """
+        Expected output:
+        +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
+        |R| |  | |R|  | | |  | | |  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  |R| |  | |R|  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  | | |  | | |  |R| |  | |R|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        """);
+        world1.addRock();
+        System.out.println("Actual output:");
+        world1.printWorld();
+
+        // Test 05
+        // Test addPaper() method. w=2, h=3, Rocks=1
+        System.out.println("Test 05:\nTesting addPaper() method. w=2, h=3, Paper=1");
+        System.out.println(
+                """
+        Expected output:
+        +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
+        |P| |  | |P|  | | |  | | |  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  |P| |  | |P|  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  | | |  | | |  |P| |  | |P|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        """);
+        World world3 = new World(2, 3);
+        world3.addPaper();
+        System.out.println("Actual output:");
+        world3.printWorld();
+
+        // Test 06
+        // Test addScissors() method. w=2, h=3, Rocks=1
+        System.out.println("Test 04:\nTesting addScissors() method. w=2, h=3, Scissors=1");
+        System.out.println(
+                """
+        Expected output:
+        +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
+        |S| |  | |S|  | | |  | | |  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  |S| |  | |S|  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  | | |  | | |  |S| |  | |S|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        """);
+        World world4 = new World(2, 3);
+        world4.addScissors();
+        System.out.println("Actual output:");
+        world4.printWorld();
     }
 }

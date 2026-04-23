@@ -77,7 +77,7 @@ class World{
         int yRock = getRandomHeight(); //gets the y coordinate of the rock by generating a random int between 0 and height
         Point rockPoint = findEmpty(xRock, yRock);  //finds an empty coordinate in the world array
 
-        new Rock(rockPoint, this.world);
+        this.world[rockPoint.getPointX()][rockPoint.getPointY()] = new Rock(rockPoint, this.world);
     }
 
     /*
@@ -146,6 +146,34 @@ class World{
      */
     public int getRandomHeight(){
         return (int)(random() * this.height);
+    }
+
+    public void printWorld(){
+        for (int idxLine = 0; idxLine < this.width; idxLine++){
+           System.out.print("+-") ; //prints the top +-+-+-
+        }
+        System.out.print("+\n"); // adds the last + to the top line
+
+        for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) {
+                if (world[idxWidth][idxHeight] instanceof Rock) {
+                    System.out.print("|R");
+                } else if (world[idxWidth][idxHeight] instanceof Paper) {
+                    System.out.print("|P");
+                } else if (world[idxWidth][idxHeight] instanceof Scissors) {
+                    System.out.print("|S");
+                } else {
+                    System.out.print("| ");
+                }
+            }
+
+            System.out.print("|\n");
+
+            for (int idxLine = 0; idxLine < this.width; idxLine++){
+                System.out.print("+-") ; //prints the top +-+-+-
+            }
+            System.out.print("+\n"); // adds the last + to the top line
+        }
     }
 
 
