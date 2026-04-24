@@ -23,7 +23,7 @@ class World{
     Object[][] world;
 
     /*
-    Creates the world as an Array<Array<String>> where its an Array[width[height]].
+    purpose: Creates the world as an Array<Array<String>> where its an Array[width[height]].
     each empty slot is represented as null (Java default)
     our coordinate system will be x in the horizantal direction (also the width), starting at 0
     and our y will be in the vertical direction(also known as the height) starting at 0.
@@ -44,7 +44,7 @@ class World{
     }
 
     /*
-    initializes each rock, paper, and scissors objects based on how many the user wanted
+    purpose: initializes each rock, paper, and scissors objects based on how many the user wanted
     Input: int number of objects
     Result: it returns none but the world array will be updated with the objects in the correct x and y coordinates
      */
@@ -55,7 +55,7 @@ class World{
         }
     }
     /*
-    adds an entity (rock, paper, and scissors) in the world.
+    purpose: adds an entity (rock, paper, and scissors) in the world.
     Input:null
     output:null
     */
@@ -66,7 +66,7 @@ class World{
     }
 
     /*
-    this initializes a Rock Object and add it to our world array.
+    purpose: this initializes a Rock Object and add it to our world array.
     Input: null
     output: null
     Result: After finding an empty spot using the findEmpty,
@@ -82,7 +82,7 @@ class World{
     }
 
     /*
-    this initializes a Paper Object and add it to our world array.
+    purpose: this initializes a Paper Object and add it to our world array.
     Input: null
     output: null
     Result: After finding an empty spot using the findEmpty,
@@ -98,7 +98,7 @@ class World{
     }
 
     /*
-    this initializes a Scissors Object and add it to our world array.
+    purpose: this initializes a Scissors Object and add it to our world array.
     Input: null
     output: null
     Result: After finding an empty spot using the findEmpty,
@@ -113,7 +113,7 @@ class World{
     }
 
     /*
-    finds an empty spot in the array initializing all the objects to make sure they have a place
+    purpose: finds an empty spot in the array initializing all the objects to make sure they have a place
     (we check to make sure all objects will fit in dimensions in gameplay)
     input: int x, int y
     result: Point(x,y). Returns a point that is a valid empty spot.
@@ -135,7 +135,7 @@ class World{
     }
 
     /*
-    gets a random value between 0 and the width
+    purpose: gets a random value between 0 and the width
     input: null
     output: int of a random value
      */
@@ -144,7 +144,7 @@ class World{
     }
 
     /*
-    gets a random value between 0 and the height
+    purpose: gets a random value between 0 and the height
     input: null
     output: int of a random value
      */
@@ -152,11 +152,15 @@ class World{
         return (int)(random() * this.height);
     }
 
-
+    /*
+    purpose: to start a round, have each entity attack each other, and then move around the board
+    input: null
+    output: null
+     */
     public void playRound(){
 
         for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
-            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to print at each width first before the height
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
                 if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
                     ((Rock) world[idxWidth][idxHeight]).rockAttack();
                 } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
@@ -172,7 +176,7 @@ class World{
         }
 
         for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
-            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to print at each width first before the height
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
                 if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
                     ((Rock) world[idxWidth][idxHeight]).moveRock();
                 } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
@@ -183,6 +187,14 @@ class World{
             }
         }
 
+        printWorld();
+        try {
+            // Pauses for 0.5
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            // restore interrupted status
+            Thread.currentThread().interrupt();
+        }
 
     }
 
