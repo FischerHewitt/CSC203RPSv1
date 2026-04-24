@@ -16,16 +16,6 @@
 (y)                          v
  */
 
-<<<<<<< HEAD
-import java.util.ArrayList;
-import java.util.Random;
-
-public class Scissors {
-    static int scissorsCount = 0;
-    private Object[][] world;
-    private Point position;
-
-=======
 // Documentation
 // Scissors.java
 // Purpose: this class represents a scissor entity that moves around the world
@@ -72,37 +62,22 @@ public class Scissors {
     private Point position;
 
     // Increment scissors count
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     public Scissors(Point position, Object[][] world){
         this.position = position;
         this.world = world;
         scissorsCount++;
     }
 
-<<<<<<< HEAD
-=======
     // Get current position
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     public Point getEntityPosition() {
         return position;
     }
 
-<<<<<<< HEAD
-=======
     // Set current position
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     public void setEntityPosition(Point position) {
         this.position = position;
     }
 
-<<<<<<< HEAD
-    public ArrayList<Point> checkNeighbors() {
-        ArrayList<Point> neighbors = new ArrayList<>();
-
-        // Check all positions around the rock
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-=======
     // Check neighbors
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
@@ -110,16 +85,11 @@ public class Scissors {
         // Check all positions around the rock
         for(int x = -1; x <= 1; x++){
             for(int y = -1; y <= 1; y++){
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
                 int newX = position.getPointX() + x;
                 int newY = position.getPointY() + y;
 
                 // Add to list if within bounds
-<<<<<<< HEAD
-                if ((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)) {
-=======
                 if((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)){
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
                     neighbors.add(new Point(newX, newY));
                 }
             }
@@ -128,10 +98,7 @@ public class Scissors {
     }
 
 
-<<<<<<< HEAD
-=======
     // Move scissor
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     public void moveScissors(){
         ArrayList<Point> neighbors = checkNeighbors();
 
@@ -141,21 +108,14 @@ public class Scissors {
         setEntityPosition(newPosition);
     }
 
-<<<<<<< HEAD
-=======
 
     // Scissor attack
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     public void scissorsAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
             if(world[p.getPointX()][p.getPointY()] instanceof Paper){
                 world[p.getPointX()][p.getPointY()] = null;
-<<<<<<< HEAD
-                Paper.paperCount++;
-=======
                 Paper.paperCount--;
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
             }
         }
     }
