@@ -115,6 +115,7 @@ public class Rock {
         for (Point p : neighbors) {
             if(world[p.getPointX()][p.getPointY()] instanceof Scissors){
                 world[p.getPointX()][p.getPointY()] = null;
+                    Scissors.scissorsCount--;
             }
         }
     }

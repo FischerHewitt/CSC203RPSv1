@@ -152,7 +152,39 @@ class World{
         return (int)(random() * this.height);
     }
 
-    //Random
+
+    public void playRound(){
+
+        for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to print at each width first before the height
+                if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
+                    ((Rock) world[idxWidth][idxHeight]).rockAttack();
+                } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
+                    ((Paper) world[idxWidth][idxHeight]).paperAttack();
+                } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
+                    ((Scissors) world[idxWidth][idxHeight]).scissorsAttack();
+                }
+            }
+        }
+
+        if ((Rock.rockCount == 0 && Paper.paperCount == 0) | (Paper.paperCount == 0 && Scissors.scissorsCount == 0) | (Scissors.scissorsCount == 0 && Rock.rockCount == 0)){
+            return;
+        }
+
+        for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
+            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to print at each width first before the height
+                if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
+                    ((Rock) world[idxWidth][idxHeight]).moveRock();
+                } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
+                    ((Paper) world[idxWidth][idxHeight]).movePaper();
+                } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
+                    ((Scissors) world[idxWidth][idxHeight]).moveScissors();
+                }
+            }
+        }
+
+
+    }
 
     /*
     Purpose: prints the world with the Rock, Paper, and Scissors objects in it
