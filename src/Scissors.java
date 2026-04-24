@@ -16,38 +16,6 @@
 (y)                          v
  */
 
-// Documentation
-// Scissors.java
-// Purpose: this class represents a scissor entity that moves around the world
-
-// Scissors() -> Scissors
-// Purpose: this constructor initializes a scissor object with a position and world
-// Examples: Scissor(new Point(3,4), world) -> new Scissor at position (3,4)
-
-// getEntityPosition() -> Point
-// Purpose: this function returns the current position of the scissor
-// Examples: getEntityPosition() -> Point(3,4)
-
-// setEntityPosition() -> void
-// Purpose: this function sets the scissors to a new position
-// Examples: setEntityPosition(new Point(5,6)) -> scissor is now at (5,6)
-
-//totalScissor() -> int
-//Purpose: this function calculates the total number of scissors
-//Examples: totalScissor() -> 5
-
-// checkNeighbors() -> ArrayList
-// Purpose: this function checks all neighboring cells around the scissors and returns a list of valid positions
-// Examples: checkNeighbors() -> [(2,2), (2,3), (3,2)]
-
-//moveScissor() -> void
-//Purpose: this function moves the scissors in a direction (N, E, S, W)
-//Examples: moveScissor() -> scissor moves from Point(1, 1) to Point(2, 2)
-
-//scissorAttack() -> void
-//Purpose: this function attacks an object if it is on either side of it
-//Examples: scissorAttack() -> removes adjacent rock if it is next to scissor
-
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -61,24 +29,44 @@ public class Scissors {
     private Object[][] world;
     private Point position;
 
-    // Increment scissors count
+/*
+    Initializes a scissors object with a position and world
+    Input: Point position, Object[][] world
+    Result: A new Scissors object is created at the given position in the given world
+    Returns: Scissors
+*/
     public Scissors(Point position, Object[][] world){
         this.position = position;
         this.world = world;
         scissorsCount++;
     }
 
-    // Get current position
+/*
+    Returns the current position of the scissors
+    Input: none
+    Result: The current position of the scissors is returned
+    Returns: Point
+*/
     public Point getEntityPosition() {
         return position;
     }
 
-    // Set current position
+/*
+    Sets the scissors to a new position
+    Input: Point position
+    Result: The scissors position is updated to the new position
+    Returns: void
+*/
     public void setEntityPosition(Point position) {
         this.position = position;
     }
 
-    // Check neighbors
+/*
+    Checks all neighboring cells around the scissors and returns a list of valid positions
+    Input: none
+    Result: A list of valid neighboring positions is returned
+    Returns: ArrayList<Point>
+*/
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
 
@@ -98,7 +86,12 @@ public class Scissors {
     }
 
 
-    // Move scissor
+/*
+    Moves the scissors to a random neighboring cell
+    Input: none
+    Result: The scissors moves to a random valid neighboring position
+    Returns: void
+*/
     public void moveScissors(){
         ArrayList<Point> neighbors = checkNeighbors();
 
@@ -108,8 +101,12 @@ public class Scissors {
         setEntityPosition(newPosition);
     }
 
-
-    // Scissor attack
+/*
+    Attacks a paper object if it is in a neighboring cell
+    Input: none
+    Result: Adjacent paper is removed from the world and paperCount decreases by 1
+    Returns: void
+*/
     public void scissorsAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {

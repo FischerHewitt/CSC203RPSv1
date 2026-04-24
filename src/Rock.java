@@ -16,41 +16,10 @@
 (y)                          v
  */
 
-// Documentation
-// Rock.java
-// Purpose: this class represents a rock entity that moves around the world
-
-// Rock() -> Rock
-// Purpose: this constructor initializes a rock object with a position and world
-// Examples: Rock(new Point(3,4), world) -> new Rock at position (3,4)
-
-// getEntityPosition() -> Point
-// Purpose: this function returns the current position of the rock
-// Examples: getEntityPosition() -> Point(3,4)
-
-// setEntityPosition() -> void
-// Purpose: this function sets the rock to a new position
-// Examples: setEntityPosition(new Point(5,6)) -> rock is now at (5,6)
-
-//totalRock() -> int
-//Purpose: this function calculates the total number of rocks
-//Examples: totalRock() -> 5
-
-// checkNeighbors() -> ArrayList
-// Purpose: this function checks all neighboring cells around the rock and returns a list of valid positions
-// Examples: checkNeighbors() -> [(2,2), (2,3), (3,2)]
-
-//moveRock() -> void
-//Purpose: this function moves the rock in a direction (N, E, S, W)
-//Examples: moveRock() -> rock moves from Point(1, 1) to Point(2, 2)
-
-//rockAttack() -> void
-//Purpose: this function attacks an object if it is on either side of it
-//Examples: rockAttack() -> removes adjacent paper if it is next to rock
-
 
 import java.util.ArrayList;
 import java.util.Random;
+
 
 public class Rock {
     // Current rock position
@@ -61,24 +30,44 @@ public class Rock {
     private Object[][] world;
     private Point position;
 
-    // Increment rock count
+/*
+    Initializes a rock object with a position and world
+    Input: Point position, Object[][] world
+    Result: A new Rock object is created at the given position in the given world
+    Returns: Rock
+*/
     public Rock(Point position, Object[][] world){
         this.position = position;
         this.world = world;
         rockCount++;
     }
 
-    // Get current position
+/*
+    Returns the current position of the rock
+    Input: none
+    Result: The current position of the rock is returned
+    Returns: Point
+*/
     public Point getEntityPosition() {
         return position;
     }
 
-    // Set current position
+/*
+    Sets the rock to a new position
+    Input: Point position
+    Result: The rock's position is updated to the new position
+    Returns: void
+*/
     public void setEntityPosition(Point position) {
         this.position = position;
     }
 
-    // Check neighbors
+/*
+    Checks all neighboring cells around the rock and returns a list of valid positions
+    Input: none
+    Result: A list of valid neighboring positions is returned
+    Returns: ArrayList<Point>
+*/
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
 
@@ -98,7 +87,12 @@ public class Rock {
     }
 
 
-    // Move rock
+/*
+    Moves the rock to a random neighboring cell
+    Input: none
+    Result: The rock moves to a random valid neighboring position
+    Returns: void
+*/
     public void moveRock(){
         ArrayList<Point> neighbors = checkNeighbors();
 
@@ -109,7 +103,12 @@ public class Rock {
     }
 
 
-    // Rock attack
+/*
+    Attacks a scissors object if it is in a neighboring cell
+    Input: none
+    Result: Adjacent scissors is removed from the world and scissorsCount decreases by 1
+    Returns: void
+*/
     public void rockAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         for (Point p : neighbors) {
