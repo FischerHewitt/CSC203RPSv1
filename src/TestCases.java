@@ -191,7 +191,7 @@ public class TestCases {
 
         // Test 09
         // Test getRandomWidth() and getRandomHeight() method. w=2, h=3
-        System.out.println("Test 08:\nTesting getRandomWidth() and getRandomHeight() method. w=2, h=3");
+        System.out.println("Test 09:\nTesting getRandomWidth() and getRandomHeight() method. w=2, h=3");
         System.out.println(
                 """
         Expected output:
