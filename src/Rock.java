@@ -72,13 +72,13 @@ public class Rock {
         ArrayList<Point> neighbors = new ArrayList<>();
 
         // Check all positions around the rock
-        for(int x = -1; x <= 1; x++){
-            for(int y = -1; y <= 1; y++){
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
                 int newX = position.getPointX() + x;
                 int newY = position.getPointY() + y;
 
                 // Add to list if within bounds
-                if((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)){
+                if ((newX < this.world.length) && (0 <= newX) && (newY < this.world[0].length) && (0 <= newY)) {
                     neighbors.add(new Point(newX, newY));
                 }
             }
@@ -133,8 +133,11 @@ public class Rock {
         for (Point p : validNeighbors) {
             if(world[p.getPointX()][p.getPointY()] instanceof Scissors){
                 world[p.getPointX()][p.getPointY()] = null;
-                    Scissors.scissorsCount--;
+                Scissors.scissorsCount--;
             }
         }
     }
+
+
+
 }
