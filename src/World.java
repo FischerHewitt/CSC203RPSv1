@@ -158,42 +158,45 @@ class World{
     output: null
      */
     public void playRound(){
-
-        for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
-            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
-                if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                    ((Rock) world[idxWidth][idxHeight]).rockAttack();
-                } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
-                    ((Paper) world[idxWidth][idxHeight]).paperAttack();
-                } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
-                    ((Scissors) world[idxWidth][idxHeight]).scissorsAttack();
+        boolean running = true;
+        while (running) {
+            for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
+                for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
+                    if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
+                        ((Rock) world[idxWidth][idxHeight]).rockAttack();
+                    } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
+                        ((Paper) world[idxWidth][idxHeight]).paperAttack();
+                    } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
+                        ((Scissors) world[idxWidth][idxHeight]).scissorsAttack();
+                    }
                 }
             }
-        }
 
-        if ((Rock.rockCount == 0 && Paper.paperCount == 0) | (Paper.paperCount == 0 && Scissors.scissorsCount == 0) | (Scissors.scissorsCount == 0 && Rock.rockCount == 0)){
-            return;
-        }
+            if ((Rock.rockCount == 0 && Paper.paperCount == 0) | (Paper.paperCount == 0 && Scissors.scissorsCount == 0) | (Scissors.scissorsCount == 0 && Rock.rockCount == 0)) {
+                running = false;
+                break;
+            }
 
-        for (int idxHeight = 0; idxHeight < this.height; idxHeight++){
-            for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
-                if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                    ((Rock) world[idxWidth][idxHeight]).moveRock();
-                } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
-                    ((Paper) world[idxWidth][idxHeight]).movePaper();
-                } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
-                    ((Scissors) world[idxWidth][idxHeight]).moveScissors();
+            for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
+                for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
+                    if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
+                        ((Rock) world[idxWidth][idxHeight]).moveRock();
+                    } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
+                        ((Paper) world[idxWidth][idxHeight]).movePaper();
+                    } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
+                        ((Scissors) world[idxWidth][idxHeight]).moveScissors();
+                    }
                 }
             }
-        }
 
-        printWorld();
-        try {
-            // Pauses for 0.5
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            // restore interrupted status
-            Thread.currentThread().interrupt();
+            printWorld();
+            try {
+                // Pauses for 0.5
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                // restore interrupted status
+                Thread.currentThread().interrupt();
+            }
         }
 
     }
