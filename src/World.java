@@ -23,11 +23,7 @@ class World{
     Object[][] world;
 
     /*
-<<<<<<< HEAD
     purpose: Creates the world as an Array<Array<String>> where its an Array[width[height]].
-=======
-    Creates the world as an Array<Array<String>> where it's an Array[width[height]].
->>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     each empty slot is represented as null (Java default)
     our coordinate system will be x in the horizontal direction (also the width), starting at 0
     and our y will be in the vertical direction(also known as the height) starting at 0.
@@ -54,19 +50,11 @@ class World{
      */
     public void initializeObjects(int numOfObjects){
         for (int idx = 0; idx < numOfObjects; idx++) {
-            addEntity();
+            addRock();// adds a rock to the world
+            addPaper();// adds a paper to the world
+            addScissors();// adds scissors to the world
 
         }
-    }
-    /*
-    purpose: adds an entity (rock, paper, and scissors) in the world.
-    Input:null
-    output:null
-    */
-    public void addEntity(){
-        addRock();// adds a rock to the world
-        addPaper();// adds a paper to the world
-        addScissors();// adds scissors to the world
     }
 
     /*
@@ -132,7 +120,7 @@ class World{
             if (world[x][y] == null){ // check to see if it is null space or if we need to increase the height by 1
                 break;
             }
-            y = (y + 1) % this.height;
+            y = (y + 1) % this.height; // makes sure it stays within the height boundaries
         }
 
         return new Point(x, y);
@@ -141,6 +129,7 @@ class World{
     /*
     purpose: gets a random value between 0 and the width
     input: null
+    result: a random integer between 0 and the width
     output: int of a random value
      */
     public int getRandomWidth(){
@@ -150,6 +139,7 @@ class World{
     /*
     purpose: gets a random value between 0 and the height
     input: null
+    result: a random integer between 0 and the height
     output: int of a random value
      */
     public int getRandomHeight(){
@@ -159,57 +149,100 @@ class World{
     /*
     purpose: to start a round, have each entity attack each other, and then move around the board
     input: null
+    result: one class is left standing and the games ends
     output: null
      */
     public void playRound(){
         boolean running = true;
+        String winner = "";
+        printWorld(); // prints the initial world with all the entities
+        // runs the game
         while (running) {
+            boolean attackInstance = false; // nobody has attacked anyoone yet
+            // Each entity attacks each other in order of Rock, Paper, then Scissors
             for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
                 for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
 
                     if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                        ((Rock) world[idxWidth][idxHeight]).rockAttack();
+                        ((Rock) world[idxWidth][idxHeight]).rockAttack(); // rock attack
+                        attackInstance = true;
                     } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
                         ((Paper) world[idxWidth][idxHeight]).paperAttack();
+                        attackInstance = true;
                     } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
                         ((Scissors) world[idxWidth][idxHeight]).scissorsAttack();
+                        attackInstance = true;
                     }
                 }
             }
 
-            if ((Rock.rockCount == 0 && Paper.paperCount == 0) | (Paper.paperCount == 0 && Scissors.scissorsCount == 0) | (Scissors.scissorsCount == 0 && Rock.rockCount == 0)) {
+            // if somebody attacks someone, I want to see the board updated before the pieces move
+            if (attackInstance) {
+                printWorld();
+                try {
+                    Thread.sleep(500); // Pauses for 0.5
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt(); // Pauses for 0.5
+                }
+            }
+            // Checks to see if Scissors Has Won
+            if (Rock.rockCount == 0 && Paper.paperCount == 0) {
                 running = false;
+                winner = "Scissors";
+                break;
+            }
+            // checks to see if rock has won
+            else if ((Paper.paperCount == 0 && Scissors.scissorsCount == 0)){
+                running = false;
+                winner = "Rock";
+                break;
+            }
+            // checks to see if Paper has won
+            else if (Scissors.scissorsCount == 0 && Rock.rockCount == 0){
+                running = false;
+                winner = "Paper";
                 break;
             }
 
+            // Moves each object
             for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
                 for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
                     if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                        ((Rock) world[idxWidth][idxHeight]).moveRock();
+                        ((Rock) world[idxWidth][idxHeight]).moveRock(); // move rock
                     } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
-                        ((Paper) world[idxWidth][idxHeight]).movePaper();
+                        ((Paper) world[idxWidth][idxHeight]).movePaper(); // move paper
                     } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
-                        ((Scissors) world[idxWidth][idxHeight]).moveScissors();
+                        ((Scissors) world[idxWidth][idxHeight]).moveScissors(); // move scissors
                     }
                 }
             }
 
             printWorld();
             try {
-                // Pauses for 0.5
-                Thread.sleep(500);
+                Thread.sleep(500);// Pauses for 0.5
             } catch (InterruptedException e) {
-                // restore interrupted status
-                Thread.currentThread().interrupt();
+                Thread.currentThread().interrupt();// restore interrupted status
             }
 
         }
+
+        printWorld(); // prints the final world
+        System.out.printf("Winner: %s", winner); // prints the winner of the game
 
     }
 
     /*
     Purpose: prints the world with the Rock, Paper, and Scissors objects in it
     input: null
+    result: prints the world
+    ex:
+    +-+-+
+    |R|P|
+    +-+-+
+    |P|S|
+    +-+-+
+    |S|R|
+    +-+-+
     output: null
      */
     public void printWorld(){

@@ -221,5 +221,254 @@ public class TestCases {
         World world10 = new World(2, 3);
         world10.initializeObjects(2);
         world10.printWorld();
+
+        // Test 11
+        // Test moveRock() method. Rock starting at (1,1)
+        System.out.println("Test 11:\nTesting moveRock() method, starting at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        ex:
+        +-+-+or+-+-+or+-+-+or+-+-+or+-+-+or+-+-+ 
+        |R| |  | |R|  | | |  | | |  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  |R| |  | |R|  | | |  | | |
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        | | |  | | |  | | |  | | |  |R| |  | |R|
+        +-+-+  +-+-+  +-+-+  +-+-+  +-+-+  +-+-+ 
+        """);
+        System.out.println("Actual output:");
+        World world11 = new World(2, 3);
+        world11.world[1][1] = new Rock(new Point(1,1), world11.world);
+        ((Rock) world11.world[1][1]).moveRock();
+        world11.printWorld();
+
+        // Test 12
+        // Test movePaper() method. Paper starting at (1,1)
+        System.out.println("Test 12:\nTesting movePaper() method, starting at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        ex:
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        |P| | |  | |P| |  | | |P|  | | | |  | | | |  | | | |  | | | |  | | | |  | | | |
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        | | | |  | | | |  | | | |  |P| | |  | |P| |  | | |P|  | | | |  | | | |  | | | |
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        | | | |  | | | |  | | | |  | | | |  | | | |  | | | |  |P| | |  | |P| |  | | |P|
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        """);
+        System.out.println("Actual output:");
+        World world12 = new World(3, 3);
+        world12.world[1][1] = new Paper(new Point(1,1), world12.world);
+        ((Paper) world12.world[1][1]).movePaper();
+        world12.printWorld();
+
+        // Test 13
+        // Test moveScissors() method. Scissors starting at (1,1)
+        System.out.println("Test 13:\nTesting moveScissors() method, starting at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        ex:
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        |P| | |  | |P| |  | | |P|  | | | |  | | | |  | | | |  | | | |  | | | |  | | | |
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        | | | |  | | | |  | | | |  |P| | |  | |P| |  | | |P|  | | | |  | | | |  | | | |
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        | | | |  | | | |  | | | |  | | | |  | | | |  | | | |  |P| | |  | |P| |  | | |P|
+        +-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+or+-+-+-+
+        """);
+        System.out.println("Actual output:");
+        World world13 = new World(3, 3);
+        world13.world[1][1] = new Scissors(new Point(1,1), world13.world);
+        ((Scissors) world13.world[1][1]).moveScissors();
+        world13.printWorld();
+
+        // Test 14
+        // Test moveRock() method. Rock starting at (1,1) and seeing if it stays at 1,1 if its blocked in
+        System.out.println("Test 11:\nTesting moveRock() method, starting at (1,1), seeing if it stays at (1,1).");
+        System.out.println(
+                """
+                Expected output:
+                World:
+                +-+-+-+-+
+                |R|R|R|R|
+                +-+-+-+-+
+                |R|R|R|R|
+                +-+-+-+-+
+                |R|R|R|R|
+                +-+-+-+-+
+                """);
+        ((Rock) world7.world[1][1]).moveRock();
+        System.out.println("Actual output:");
+        world7.printWorld();
+
+        // Test 15
+// Test movePaper() method. Paper at (1,1) blocked in
+        System.out.println("Test 15:\nTesting movePaper() method, starting at (1,1), blocked in.");
+        System.out.println(
+                """
+        Expected output:
+        World:
+        +-+-+-+
+        |P|P|P|
+        +-+-+-+
+        |P|P|P|
+        +-+-+-+
+        |P|P|P|
+        +-+-+-+
+        """);
+
+        World world15 = new World(3, 3);
+
+        // Fill entire grid with Paper
+        for (int x15 = 0; x15 < 3; x15++) {
+            for (int y15 = 0; y15 < 3; y15++) {
+                world15.world[x15][y15] = new Paper(new Point(x15, y15), world15.world);
+            }
+        }
+
+        // Try to move center Paper
+        ((Paper) world15.world[1][1]).movePaper();
+        System.out.println("Actual output:");
+        world15.printWorld();
+
+        // Test 16
+        // Test moveScissors() method. Scissors at (1,1) blocked in
+        System.out.println("Test 16:\nTesting moveScissors() method, starting at (1,1), blocked in.");
+        System.out.println(
+                """
+        Expected output:
+        World:
+        +-+-+-+
+        |S|S|S|
+        +-+-+-+
+        |S|S|S|
+        +-+-+-+
+        |S|S|S|
+        +-+-+-+
+        """);
+
+        World world16 = new World(3, 3);
+
+        // Fill entire grid with Scissors
+        for (int x16 = 0; x16 < 3; x16++) {
+            for (int y16 = 0; y16 < 3; y16++) {
+                world16.world[x16][y16] = new Scissors(new Point(x16, y16), world16.world);
+            }
+        }
+
+        // Try to move center Scissors
+        ((Scissors) world16.world[1][1]).moveScissors();
+        System.out.println("Actual output:");
+        world16.printWorld();
+
+
+        // Test 17
+        // Test scissorsAttack() method. Scissors starting at (1,1)
+        System.out.println("Test 17:\nTesting scissorsAttack(). Scissors is at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        All Paper in the 8 surrounding squares are removed.
+        ex:
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        | |S| |
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        """);
+        World world17 = new World(3, 3);
+        world17.world[1][1] = new Scissors(new Point(1,1), world17.world);
+
+        // Add Paper to all 8 surrounding spaces
+        world17.world[0][0] = new Paper(new Point(0,0), world17.world);
+        world17.world[0][1] = new Paper(new Point(0,1), world17.world);
+        world17.world[0][2] = new Paper(new Point(0,2), world17.world);
+        world17.world[1][0] = new Paper(new Point(1,0), world17.world);
+        world17.world[1][2] = new Paper(new Point(1,2), world17.world);
+        world17.world[2][0] = new Paper(new Point(2,0), world17.world);
+        world17.world[2][1] = new Paper(new Point(2,1), world17.world);
+        world17.world[2][2] = new Paper(new Point(2,2), world17.world);
+
+        System.out.println("Added Paper:");
+        world17.printWorld();
+        System.out.println("Actual output:");
+        ((Scissors) world17.world[1][1]).scissorsAttack();
+        world17.printWorld();
+
+        // Test 18
+        // Test rockAttack() method. Rock starting at (1,1)
+        System.out.println("Test 18:\nTesting rockAttack(). Rock is at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        All Scissors in the 8 surrounding squares are removed.
+        ex:
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        | |R| |
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        """);
+        World world18 = new World(3, 3);
+        world18.world[1][1] = new Rock(new Point(1,1), world18.world);
+
+        // Add Scissors to all 8 surrounding spaces
+        world18.world[0][0] = new Scissors(new Point(0,0), world18.world);
+        world18.world[0][1] = new Scissors(new Point(0,1), world18.world);
+        world18.world[0][2] = new Scissors(new Point(0,2), world18.world);
+        world18.world[1][0] = new Scissors(new Point(1,0), world18.world);
+        world18.world[1][2] = new Scissors(new Point(1,2), world18.world);
+        world18.world[2][0] = new Scissors(new Point(2,0), world18.world);
+        world18.world[2][1] = new Scissors(new Point(2,1), world18.world);
+        world18.world[2][2] = new Scissors(new Point(2,2), world18.world);
+
+        System.out.println("Added Scissors:");
+        world18.printWorld();
+        System.out.println("Actual output:");
+        ((Rock) world18.world[1][1]).rockAttack();
+        world18.printWorld();
+
+
+        // Test 19
+        // Test paperAttack() method. Paper starting at (1,1)
+        System.out.println("Test 19:\nTesting paperAttack(). Paper is at (1,1).");
+        System.out.println(
+                """
+        Expected output:
+        All Rocks in the 8 surrounding squares are removed.
+        ex:
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        | |P| |
+        +-+-+-+
+        | | | |
+        +-+-+-+
+        """);
+        World world19 = new World(3, 3);
+        world19.world[1][1] = new Paper(new Point(1,1), world19.world);
+
+        // Add Rocks to all 8 surrounding spaces
+        world19.world[0][0] = new Rock(new Point(0,0), world19.world);
+        world19.world[0][1] = new Rock(new Point(0,1), world19.world);
+        world19.world[0][2] = new Rock(new Point(0,2), world19.world);
+        world19.world[1][0] = new Rock(new Point(1,0), world19.world);
+        world19.world[1][2] = new Rock(new Point(1,2), world19.world);
+        world19.world[2][0] = new Rock(new Point(2,0), world19.world);
+        world19.world[2][1] = new Rock(new Point(2,1), world19.world);
+        world19.world[2][2] = new Rock(new Point(2,2), world19.world);
+
+        System.out.println("Added Rocks:");
+        world19.printWorld();
+        System.out.println("Actual output:");
+        ((Paper) world19.world[1][1]).paperAttack();
+        world19.printWorld();
     }
 }

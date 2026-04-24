@@ -94,11 +94,22 @@ public class Paper {
  */
     public void movePaper(){
         ArrayList<Point> neighbors = checkNeighbors();
-
-        // Pick a random position from the list,
-        Random rand = new Random();
-        Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
-        setEntityPosition(newPosition);
+        ArrayList<Point> validNeighbors = new ArrayList<>();
+        for (Point neighbor: neighbors){
+            if (world[neighbor.getPointX()][neighbor.getPointY()] == null){
+                validNeighbors.add(neighbor);
+            }
+        }
+        if (validNeighbors.size() > 0) {
+            // Pick a random position from the list,
+            Random rand = new Random();
+            Point newPosition = validNeighbors.get(rand.nextInt(validNeighbors.size()));
+            // Remove from old position
+            world[position.getPointX()][position.getPointY()] = null;
+            // Place this rock in new position
+            world[newPosition.getPointX()][newPosition.getPointY()] = this;
+            setEntityPosition(newPosition);
+        }
     }
 
 
@@ -110,7 +121,14 @@ public class Paper {
 */
     public void paperAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
-        for (Point p : neighbors) {
+        ArrayList<Point> validNeighbors = new ArrayList<>();
+        for (Point neighbor: neighbors) {
+            if (world[neighbor.getPointX()][neighbor.getPointY()] instanceof Rock) {
+                validNeighbors.add(neighbor);
+            }
+        }
+
+        for (Point p : validNeighbors) {
             if(world[p.getPointX()][p.getPointY()] instanceof Rock){
                 world[p.getPointX()][p.getPointY()] = null;
                 Rock.rockCount--;
