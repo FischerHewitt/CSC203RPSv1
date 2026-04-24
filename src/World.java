@@ -23,9 +23,9 @@ class World{
     Object[][] world;
 
     /*
-    Creates the world as an Array<Array<String>> where its an Array[width[height]].
+    Creates the world as an Array<Array<String>> where it's an Array[width[height]].
     each empty slot is represented as null (Java default)
-    our coordinate system will be x in the horizantal direction (also the width), starting at 0
+    our coordinate system will be x in the horizontal direction (also the width), starting at 0
     and our y will be in the vertical direction(also known as the height) starting at 0.
     {{(0,0), (0,1), (0,2)}, {(1,0), (1,1), (2,1)}}
      */
