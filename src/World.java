@@ -94,7 +94,7 @@ class World{
         int yPaper = getRandomHeight(); //gets the y coordinate of the paper by generating a random int between 0 and height
         Point paperPoint = findEmpty(xPaper, yPaper);  //finds an empty coordinate in the world array
 
-        //new Paper(paperPoint, this.world);
+        new Paper(paperPoint, this.world);
     }
 
     /*
@@ -109,7 +109,7 @@ class World{
         int yScissors = getRandomHeight(); //gets the y coordinate of the scissors by generating a random int between 0 and height
         Point scissorsPoint = findEmpty(xScissors, yScissors); //finds an empty coordinate in the world array
 
-        //new Scissors(scissorsPoint, this.world);
+        new Scissors(scissorsPoint, this.world);
     }
 
     /*

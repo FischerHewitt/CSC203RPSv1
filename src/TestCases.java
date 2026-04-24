@@ -100,7 +100,7 @@ public class TestCases {
         world1.printWorld();
 
         // Test 05
-        // Test addPaper() method. w=2, h=3, Rocks=1
+        // Test addPaper() method. w=2, h=3, paper=1
         System.out.println("Test 05:\nTesting addPaper() method. w=2, h=3, Paper=1");
         System.out.println(
                 """
@@ -120,7 +120,7 @@ public class TestCases {
         world3.printWorld();
 
         // Test 06
-        // Test addScissors() method. w=2, h=3, Rocks=1
+        // Test addScissors() method. w=2, h=3, scissors = 1
         System.out.println("Test 06:\nTesting addScissors() method. w=2, h=3, Scissors=1");
         System.out.println(
                 """
@@ -140,8 +140,8 @@ public class TestCases {
         world4.printWorld();
 
         // Test 07
-        // Test findEmpty() method indirectly using world1. w=2, h=3, Rocks=5
-        System.out.println("Test 07:\nTesting findEmpty() method. w=2, h=3, Rocks=1");
+        // Test findEmpty() method indirectly using world1. w=2, h=3, Rocks=12
+        System.out.println("Test 07:\nTesting findEmpty() method. w=2, h=3, Rocks=12");
         System.out.println(
                 """
         Expected output:
@@ -188,5 +188,18 @@ public class TestCases {
         world1.addRock();
         System.out.println("Actual output:");
         world1.printWorld();
+
+        // Test 09
+        // Test getRandomWidth() and getRandomHeight() method. w=2, h=3
+        System.out.println("Test 08:\nTesting getRandomWidth() and getRandomHeight() method. w=2, h=3");
+        System.out.println(
+                """
+        Expected output:
+        getRandomWidth = 0 or 1
+        getRandomHeight = 0, 1, or 2
+        """);
+        System.out.println("Actual output:");
+        System.out.printf("getRandomWidth = %d%n" +
+                "getRandomHeight = %d", world1.getRandomWidth(), world1.getRandomHeight());
     }
 }
