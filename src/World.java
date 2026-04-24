@@ -272,9 +272,9 @@ class World{
 
             // prints the bottom line
             for (int idxLine = 0; idxLine < this.width; idxLine++){
-                System.out.print("+-") ; //prints the top +-+-+-
+                System.out.print("+-") ; //prints the bottom +-+-+-
             }
-            System.out.print("+\n"); // adds the last + to the top line
+            System.out.print("+\n"); // adds the last + to the bottom line
         }
     }
 
