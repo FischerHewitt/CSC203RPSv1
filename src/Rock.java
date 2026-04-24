@@ -57,7 +57,7 @@ public class Rock {
     // Random number generator
 
     // Rock count
-    static int rockCount = 0;
+    public static int rockCount = 0;
     private Object[][] world;
     private Point position;
 

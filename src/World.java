@@ -23,9 +23,13 @@ class World{
     Object[][] world;
 
     /*
+<<<<<<< HEAD
     purpose: Creates the world as an Array<Array<String>> where its an Array[width[height]].
+=======
+    Creates the world as an Array<Array<String>> where it's an Array[width[height]].
+>>>>>>> 8d43ff2a9cefd67cfa7acdf4b3669547817f0175
     each empty slot is represented as null (Java default)
-    our coordinate system will be x in the horizantal direction (also the width), starting at 0
+    our coordinate system will be x in the horizontal direction (also the width), starting at 0
     and our y will be in the vertical direction(also known as the height) starting at 0.
     {{(0,0), (0,1), (0,2)}, {(1,0), (1,1), (2,1)}}
      */
@@ -94,7 +98,7 @@ class World{
         int yPaper = getRandomHeight(); //gets the y coordinate of the paper by generating a random int between 0 and height
         Point paperPoint = findEmpty(xPaper, yPaper);  //finds an empty coordinate in the world array
 
-        new Paper(paperPoint, this.world);
+        this.world[paperPoint.getPointX()][paperPoint.getPointY()] = new Paper(paperPoint, this.world);
     }
 
     /*
@@ -109,7 +113,7 @@ class World{
         int yScissors = getRandomHeight(); //gets the y coordinate of the scissors by generating a random int between 0 and height
         Point scissorsPoint = findEmpty(xScissors, yScissors); //finds an empty coordinate in the world array
 
-        new Scissors(scissorsPoint, this.world);
+        this.world[scissorsPoint.getPointX()][scissorsPoint.getPointY()] = new Scissors(scissorsPoint, this.world);
     }
 
     /*
@@ -162,6 +166,7 @@ class World{
         while (running) {
             for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
                 for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
+
                     if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
                         ((Rock) world[idxWidth][idxHeight]).rockAttack();
                     } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
@@ -197,6 +202,7 @@ class World{
                 // restore interrupted status
                 Thread.currentThread().interrupt();
             }
+
         }
 
     }

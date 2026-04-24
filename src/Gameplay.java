@@ -39,9 +39,12 @@ public class Gameplay {
         int lInt = Integer.parseInt(l);
         World GameWorld = new World(wInt, lInt);
 
+
         System.out.println("How many of each rock paper scissors do you want\n" +
-                "in the world (ie, three rocks, three papers, three scissors. input: 3");
+                "in the world (i.e., three rocks, three papers, three scissors. input: 3)");
         String Objects = input.nextLine();
+        GameWorld.initializeObjects(Objects);
+        GameWorld.playRound();
 
     }
 }
