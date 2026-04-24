@@ -54,5 +54,13 @@ public class Gameplay {
         GameWorld.initializeObjects(objInts);
         GameWorld.playRound();
 
+        int objInts = Integer.parseInt(Objects);
+
+        GameWorld.addEntity();
+        GameWorld.initializeObjects(objInts);
+
+
+        GameWorld.playRound();
+
     }
 }
