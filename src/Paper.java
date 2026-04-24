@@ -19,38 +19,6 @@
 (y)                          v
  */
 
-// Documentation
-// Paper.java
-// Purpose: this class represents a paper entity that moves around the world
-
-// Paper() -> Paper
-// Purpose: this constructor initializes a paper object with a position and world
-// Examples: Paper(new Point(3,4), world) -> new Paper at position (3,4)
-
-// getEntityPosition() -> Point
-// Purpose: this function returns the current position of the paper
-// Examples: getEntityPosition() -> Point(3,4)
-
-// setEntityPosition() -> void
-// Purpose: this function sets the paper to a new position
-// Examples: setEntityPosition(new Point(5,6)) -> paper is now at (5,6)
-
-//totalPaper() -> int
-//Purpose: this function calculates the total number of papers
-//Examples: totalPaper() -> 5
-
-// checkNeighbors() -> ArrayList
-// Purpose: this function checks all neighboring cells around the paper and returns a list of valid positions
-// Examples: checkNeighbors() -> [(2,2), (2,3), (3,2)]
-
-//movePaper() -> void
-//Purpose: this function moves the paper in a direction (N, E, S, W)
-//Examples: movePaper() -> paper moves from Point(1, 1) to Point(2, 2)
-
-//paperAttack() -> void
-//Purpose: this function attacks an object if it is on either side of it
-//Examples: paperAttack() -> removes adjacent scissor if it is next to paper
-
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -64,24 +32,44 @@ public class Paper {
     private Object[][] world;
     private Point position;
 
-    // Increment paper count
+/*
+    Initializes a paper object with a position and world
+    Input: Point position, Object[][] world
+    Result: A new Paper object is created at the given position in the given world
+    Returns: Paper
+*/
     public Paper(Point position, Object[][] world){
         this.position = position;
         this.world = world;
         paperCount++;
     }
 
-    // Get current position
+/*
+    Returns the current position of the paper
+    Input: none
+    Result: The current position of the paper is returned
+    Returns: Point
+*/
     public Point getEntityPosition() {
         return position;
     }
 
-    // Set current position
+/*
+    Sets the paper to a new position
+    Input: Point position
+    Result: The paper's position is updated to the new position
+    Returns: void
+*/
     public void setEntityPosition(Point position) {
         this.position = position;
     }
 
-    // Check neighbors
+/*
+    Checks all neighboring cells around the paper and returns a list of valid positions
+    Input: none
+    Result: A list of valid neighboring positions is returned
+    Returns: ArrayList<Point>
+*/
     public ArrayList<Point> checkNeighbors(){
         ArrayList<Point> neighbors = new ArrayList<>();
 
@@ -101,21 +89,49 @@ public class Paper {
     }
 
 
-    // Move paper
+/*
+    Moves the paper to a random neighboring cell
+    Input: none
+    Result: The paper moves to a random valid neighboring position
+    Returns: void
+ */
     public void movePaper(){
         ArrayList<Point> neighbors = checkNeighbors();
-
-        // Pick a random position from the list,
-        Random rand = new Random();
-        Point newPosition = neighbors.get(rand.nextInt(neighbors.size()));
-        setEntityPosition(newPosition);
+        ArrayList<Point> validNeighbors = new ArrayList<>();
+        for (Point neighbor: neighbors){
+            if (world[neighbor.getPointX()][neighbor.getPointY()] == null){
+                validNeighbors.add(neighbor);
+            }
+        }
+        if (validNeighbors.size() > 0) {
+            // Pick a random position from the list,
+            Random rand = new Random();
+            Point newPosition = validNeighbors.get(rand.nextInt(validNeighbors.size()));
+            // Remove from old position
+            world[position.getPointX()][position.getPointY()] = null;
+            // Place this rock in new position
+            world[newPosition.getPointX()][newPosition.getPointY()] = this;
+            setEntityPosition(newPosition);
+        }
     }
 
 
-    // Paper attack
+/*
+    Attacks a rock object if it is in a neighboring cell
+    Input: none
+    Result: Adjacent rock is removed from the world and rockCount decreases by 1
+    Returns: void
+*/
     public void paperAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
-        for (Point p : neighbors) {
+        ArrayList<Point> validNeighbors = new ArrayList<>();
+        for (Point neighbor: neighbors) {
+            if (world[neighbor.getPointX()][neighbor.getPointY()] instanceof Rock) {
+                validNeighbors.add(neighbor);
+            }
+        }
+
+        for (Point p : validNeighbors) {
             if(world[p.getPointX()][p.getPointY()] instanceof Rock){
                 world[p.getPointX()][p.getPointY()] = null;
                 Rock.rockCount--;
@@ -123,3 +139,4 @@ public class Paper {
         }
     }
 }
+

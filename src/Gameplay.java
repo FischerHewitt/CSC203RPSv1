@@ -42,7 +42,17 @@ public class Gameplay {
 
         System.out.println("How many of each rock paper scissors do you want\n" +
                 "in the world (i.e., three rocks, three papers, three scissors. input: 3)");
-        String Objects = input.nextLine();
+        String objects = input.nextLine();
+        int objInts = Integer.parseInt(objects);
+        if ((objInts * 3) > (wInt * lInt)){
+            System.out.println("too many objects");
+            return;
+        }
+        Rock.rockCount = 0;
+        Paper.paperCount = 0;
+        Scissors.scissorsCount = 0;
+        GameWorld.initializeObjects(objInts);
+        GameWorld.playRound();
 
         int objInts = Integer.parseInt(Objects);
 
