@@ -154,17 +154,17 @@ public class TestCases {
         |R|R|R|R|
         +-+-+-+-+
         """);
-        World world5 = new World(4, 3); // new world width=3 height=4
-        for (int xWorld5 = 0; xWorld5 < world5.width - 1; xWorld5++){
-            for (int yWorld5 = 0; yWorld5 < world5.height; yWorld5++){
-                world5.world[xWorld5][yWorld5] = new Rock(new Point(xWorld5,yWorld5), world2.world);
+        World world7 = new World(4, 3); // new world width=3 height=4
+        for (int xWorld7 = 0; xWorld7 < world7.width - 1; xWorld7++){
+            for (int yWorld7 = 0; yWorld7 < world7.height; yWorld7++){
+                world7.world[xWorld7][yWorld7] = new Rock(new Point(xWorld7,yWorld7), world7.world);
             }
         }
-        world5.world[3][0] = new Rock(new Point(3,0), world2.world); // new rock at Point(3,0)
-        world5.world[3][1] = new Rock(new Point(3,1), world2.world); // new rock at Point(3,1)
-         world5.addRock();
+        world7.world[3][0] = new Rock(new Point(3,0), world7.world); // new rock at Point(3,0)
+        world7.world[3][1] = new Rock(new Point(3,1), world7.world); // new rock at Point(3,1)
+        world7.addRock();
         System.out.println("Actual output:");
-        world5.printWorld();
+        world7.printWorld();
 
 
         // Test 08
@@ -201,5 +201,25 @@ public class TestCases {
         System.out.println("Actual output:");
         System.out.printf("getRandomWidth = %d%n" +
                 "getRandomHeight = %d", world1.getRandomWidth(), world1.getRandomHeight());
+
+        // Test 10
+        // Test initializeObjects method.
+        System.out.println("Test 10:\nTesting initializeObjects method.");
+        System.out.println(
+                """
+        Expected output: A world with 2 rocks 2 paper and 2 scissors.
+        ex:
+        +-+-+
+        |R|P|
+        +-+-+
+        |P|S|
+        +-+-+
+        |S|R|
+        +-+-+
+        """);
+        System.out.println("Actual output:");
+        World world10 = new World(2, 3);
+        world10.initializeObjects(2);
+        world10.printWorld();
     }
 }
