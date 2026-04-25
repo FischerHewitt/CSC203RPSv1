@@ -4,8 +4,6 @@
 //in the world (ie, three rocks, three papers, three scissors. input: 3)
 // 3. check if the amount of rocks, papers, and scissors provided will fit in the world space
 // 4. run world function and print result
-import com.sun.jdi.IntegerType;
-
 import java.util.Scanner;
 /*
     Developers: Fischer Hewitt, Sameeka Molugu, Mason Brown
@@ -44,6 +42,10 @@ public class Gameplay {
                 "in the world (i.e., three rocks, three papers, three scissors. input: 3)");
         String objects = input.nextLine();
         int objInts = Integer.parseInt(objects);
+        if (objInts <= 0) {
+            System.out.println("number of objects must be greater than 0");
+            return;
+        }
         if ((objInts * 3) > (wInt * lInt)){
             System.out.println("too many objects");
             return;

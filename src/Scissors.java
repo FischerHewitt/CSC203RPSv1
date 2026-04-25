@@ -92,7 +92,7 @@ public class Scissors {
     Result: The scissors moves to a random valid neighboring position
     Returns: void
 */
-    public void moveScissors(){
+    public boolean moveScissors(){
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
         for (Point neighbor: neighbors){
@@ -109,7 +109,9 @@ public class Scissors {
             // Place this rock in new position
             world[newPosition.getPointX()][newPosition.getPointY()] = this;
             setEntityPosition(newPosition);
+            return true;
         }
+        return false;
     }
 
 /*
@@ -118,9 +120,10 @@ public class Scissors {
     Result: Adjacent paper is removed from the world and paperCount decreases by 1
     Returns: void
 */
-    public void scissorsAttack() {
+    public boolean scissorsAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
+        boolean attacked = false;
         for (Point neighbor: neighbors) {
             if (world[neighbor.getPointX()][neighbor.getPointY()] instanceof Paper) {
                 validNeighbors.add(neighbor);
@@ -131,7 +134,9 @@ public class Scissors {
             if(world[p.getPointX()][p.getPointY()] instanceof Paper){
                 world[p.getPointX()][p.getPointY()] = null;
                 Paper.paperCount--;
+                attacked = true;
             }
         }
+        return attacked;
     }
 }

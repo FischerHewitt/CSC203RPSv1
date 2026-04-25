@@ -93,7 +93,7 @@ public class Rock {
     Result: The rock moves to a random valid neighboring position
     Returns: void
 */
-    public void moveRock(){
+    public boolean moveRock(){
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
         for (Point neighbor: neighbors){
@@ -110,7 +110,9 @@ public class Rock {
             // Place this rock in new position
             world[newPosition.getPointX()][newPosition.getPointY()] = this;
             setEntityPosition(newPosition);
+            return true;
         }
+        return false;
     }
 
 
@@ -121,9 +123,10 @@ public class Rock {
     Result: Adjacent scissors is removed from the world and scissorsCount decreases by 1
     Returns: void
 */
-    public void rockAttack() {
+    public boolean rockAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
+        boolean attacked = false;
         for (Point neighbor: neighbors) {
             if (world[neighbor.getPointX()][neighbor.getPointY()] instanceof Scissors) {
                 validNeighbors.add(neighbor);
@@ -134,8 +137,10 @@ public class Rock {
             if(world[p.getPointX()][p.getPointY()] instanceof Scissors){
                 world[p.getPointX()][p.getPointY()] = null;
                 Scissors.scissorsCount--;
+                attacked = true;
             }
         }
+        return attacked;
     }
 
 

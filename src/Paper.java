@@ -95,7 +95,7 @@ public class Paper {
     Result: The paper moves to a random valid neighboring position
     Returns: void
  */
-    public void movePaper(){
+    public boolean movePaper(){
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
         for (Point neighbor: neighbors){
@@ -112,7 +112,9 @@ public class Paper {
             // Place this rock in new position
             world[newPosition.getPointX()][newPosition.getPointY()] = this;
             setEntityPosition(newPosition);
+            return true;
         }
+        return false;
     }
 
 
@@ -122,9 +124,10 @@ public class Paper {
     Result: Adjacent rock is removed from the world and rockCount decreases by 1
     Returns: void
 */
-    public void paperAttack() {
+    public boolean paperAttack() {
         ArrayList<Point> neighbors = checkNeighbors();
         ArrayList<Point> validNeighbors = new ArrayList<>();
+        boolean attacked = false;
         for (Point neighbor: neighbors) {
             if (world[neighbor.getPointX()][neighbor.getPointY()] instanceof Rock) {
                 validNeighbors.add(neighbor);
@@ -135,8 +138,9 @@ public class Paper {
             if(world[p.getPointX()][p.getPointY()] instanceof Rock){
                 world[p.getPointX()][p.getPointY()] = null;
                 Rock.rockCount--;
+                attacked = true;
             }
         }
+        return attacked;
     }
 }
-

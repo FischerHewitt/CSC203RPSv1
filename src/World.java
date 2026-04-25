@@ -158,20 +158,24 @@ class World{
         printWorld(); // prints the initial world with all the entities
         // runs the game
         while (running) {
-            boolean attackInstance = false; // nobody has attacked anyoone yet
+            boolean attackInstance = false; // nobody has attacked anyone yet
+            boolean moveInstance = false;
             // Each entity attacks each other in order of Rock, Paper, then Scissors
             for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
                 for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
 
                     if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                        ((Rock) world[idxWidth][idxHeight]).rockAttack(); // rock attack
-                        attackInstance = true;
+                        if (((Rock) world[idxWidth][idxHeight]).rockAttack()) { // rock attack
+                            attackInstance = true;
+                        }
                     } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
-                        ((Paper) world[idxWidth][idxHeight]).paperAttack();
-                        attackInstance = true;
+                        if (((Paper) world[idxWidth][idxHeight]).paperAttack()) {
+                            attackInstance = true;
+                        }
                     } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
-                        ((Scissors) world[idxWidth][idxHeight]).scissorsAttack();
-                        attackInstance = true;
+                        if (((Scissors) world[idxWidth][idxHeight]).scissorsAttack()) {
+                            attackInstance = true;
+                        }
                     }
                 }
             }
@@ -208,13 +212,25 @@ class World{
             for (int idxHeight = 0; idxHeight < this.height; idxHeight++) {
                 for (int idxWidth = 0; idxWidth < this.width; idxWidth++) { // has to look at each width first before the height
                     if (world[idxWidth][idxHeight] instanceof Rock) { // checks if it is a rock
-                        ((Rock) world[idxWidth][idxHeight]).moveRock(); // move rock
+                        if (((Rock) world[idxWidth][idxHeight]).moveRock()) { // move rock
+                            moveInstance = true;
+                        }
                     } else if (world[idxWidth][idxHeight] instanceof Paper) { // checks if it is a paper
-                        ((Paper) world[idxWidth][idxHeight]).movePaper(); // move paper
+                        if (((Paper) world[idxWidth][idxHeight]).movePaper()) { // move paper
+                            moveInstance = true;
+                        }
                     } else if (world[idxWidth][idxHeight] instanceof Scissors) { // checks if is it a scissors
-                        ((Scissors) world[idxWidth][idxHeight]).moveScissors(); // move scissors
+                        if (((Scissors) world[idxWidth][idxHeight]).moveScissors()) { // move scissors
+                            moveInstance = true;
+                        }
                     }
                 }
+            }
+
+            if (!attackInstance && !moveInstance) {
+                running = false;
+                winner = "Draw (stalemate)";
+                break;
             }
 
             printWorld();
